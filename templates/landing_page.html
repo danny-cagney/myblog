@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <h1>Dinner Party Guests</h1>
+</head>
+{% if current_user.is_authenticated %}
+Hi {{ current_user.username }}!
+{% endif %}
+{% if current_users|length == 0 %}
+<p style="color:blue;"> Ooops. There are no users currently in your database. Make sure to add them first. </p>
+{% endif %}
+<ul>
+    {% for user in current_users %}
+    <li>{{ user.email }}</li>
+</ul>
+{% endfor %}
+
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href=" {{ url_for('index') }} ">Economic Bluff & Bluster</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href=" {{ url_for('index') }} ">Home</a>
+                </li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href=" {{ url_for('about') }} ">About</a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href=" {{ url_for('logout') }} ">Hi {{
+                        current_user.username }}! Logout</a></li>
+
+                {% else %}
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href=" {{ url_for('login') }} ">Login</a>
+                </li>
+
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Footer-->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/danny_cagney">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.linkedin.com/in/daniel-cagney-a7904262/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/danny-cagney">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="small text-center text-muted fst-italic">Copyright &copy; Daniel Cagney {{year}}</div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</html>
